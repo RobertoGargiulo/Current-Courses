@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+
+
+\begin{document}
+
+\chapter{Statistical Field Theory}
+
+\section{Lecture 10 (11/10)}
+
+We conclude the lesson by anticipating our next result. Having compute the HS transformation for the partition function (we change notation):
+\begin{equation}
+    Z = \int\prod_i\dd{\mS_i} e^{-\beta H_{\eff}[\{S_i\}]} \qquad H_{\eff} = \frac{1}{2}\sum_{ij} \mS_i(\beta \JJ)^{-1}_{ij}\mS_j - \sum_i\log(2\cosh(\mS_i+\beta h_i))
+\end{equation}
+Next time we will consider a continuum limit $\mS_i\to\mS(\r)$ and an effective theory around the critical point, where $\mS\approx 0$ (at zero field) and:
+\begin{equation}
+    \log(2\cosh\mS) \approx \frac{\mS^2}{2} - \frac{\mS^4}{12} + \BigO(\mS^6)
+\end{equation}
+
+\section{Lecture 11 (13/10)}
+
+As anticipated, to get a manageable form for the hamiltonian we concentrate around the phase transition, where $\mS_i\approx 0$, such that the effective hamiltonian (where $H_{\eff} = F_{\eff}$ in our previous notation) is just a polynomial in the $\mS_i$:
+\begin{equation}
+    H_{\eff}[\{\mS_i\}] = \frac{1}{2}\sum_{ij} J_{ij}^{-1}\mS_i\mS_j - \frac{1}{\beta}\sum_i\frac{\mS_i^2}{2} - \frac{\mS_i^4}{12} + \BigO(\mS_i^6)
+\end{equation}
+We shall now perform a continuum limit, by going from the lattice to a region of $\Rset^D$, so that the $\mS$ variable is no longer defined only on the site $i\iff \r_i$ but on continuously in $\r$. Then for any sum we will have a corresponding integral (where length is measured in units of the lattice spacing):
+\begin{equation}
+    \sum_i \mS_i \to \int\dd[D]{r} \mS(\r)
+\end{equation}
+It's clear what happens in the case of the polynomials, but for the mixed term $\mS_i\mS_j$ it's less clear.
+\begin{equation}
+    \sum_{ij} J_{ij}^{-1}\mS_i\mS_j \to \int\dd[D]{r}\dd[D]{r'} \mS(\r)J^{-1}(\r,\r')\mS(\r')
+\end{equation}
+To understand what happens let's go to k-space by Fourier transform. This is well defined even by starting with the lattice, even if the function is defined on a discrete number of k-points as well. Let's compute this for $J_{ij}$ in the case of only nearest-neighbours and translational invariance. Due to translational invariance momentum is conserved and we can talk about a one-variable fourier transform:
+\begin{equation}
+    \begin{split}
+        \tJ(\k,\k') &= \sum_{ij} J_{ij} e^{-\i\k\cdot\r_i}e^{-\i\k'\cdot\r_j} = \sum_j e^{-\i\k'\cdot\r_j} \sum_i J(\abs{\r_i-\r_j}) e^{-\i\k\cdot\r_i} = \\
+        &= \sum_j e^{-\i\k'\cdot\r_j} \sum_i J(\abs{\r_i}) e^{-\i\k\cdot(\r_i+\r_j)} = \sum_i J_{i0} e^{-\i\k\cdot\r_i} \sum_j e^{-\i(\k'+\k)\cdot\r_j}  =\\
+        &= \delta(\k+\k')\sum_i J_{i0} e^{-\i\k\cdot\r_i} = \delta(\k+\k') \tJ(\k)
+    \end{split}
+\end{equation}
+where $\delta(\k+\k')$ is for now a simple Kronecker delta but becomes a Dirac delta in the continuum limit, which motivates a different notation.\\
+
+Then since there are only nearest neighbours in the matrix $J_{ij}$ we can easily compute the sum. More precisely the now vector $J_{i0}$, containing the interaction of the spin at site $0$ with its nearest neighbours, which for a square lattice are all at distance $a$ and along the three axes:
+\begin{equation}
+    \begin{split}
+        \tJ(\k) &= \sum_j J_{j0} e^{-\i\k\cdot\r_j} = \sum_{j\nn 0} J e^{-\i\k\cdot\r_j} = J\sum_j e^{-\i\k\cdot(a\e_j)} =\\
+        &= J\sum_{\alpha=1}^D e^{-\i k_\alpha a} + e^{\i k_\alpha a} = 2J\sum_{\alpha=1}^D \cos(k_\alpha a)
+    \end{split}
+\end{equation}
+In the continuum limit $k$ is a continuous variable and so we can expand around $ka=0$. This is because $a$ is small and $k\sim 1/r$, which means that small powers of $k$ are most important for long distances, where we want to study correlations. At lowest order find then:
+\begin{equation}
+    \begin{split}
+        \tJ(\k) &\approx 2J\sum_{\alpha=1}^D \qty(1 - \frac{k_\alpha^2a^2}{2}) = 2J\qty(\sum_{\alpha=1}^D1 - \frac{a^2}{2}\sum_{\alpha=1}^Dk_\alpha^2) =\\
+        &= 2J\qty(D - \frac{k^2a^2}{2}) = 2JD\qty(1 - \frac{a^2}{2D}k^2)
+    \end{split}
+\end{equation}
+A multiplication by $k^2$ in k-space then corresponds to a derivation in real space:
+
+
+
+
+\end{document}

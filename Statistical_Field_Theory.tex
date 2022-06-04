@@ -1,0 +1,123 @@
+\begin{document}
+
+\section{Lecture 4 (15/09)}
+
+\subsection{Boundary Conditions and Topological Excitations in 1D Ising Model}
+
+Let's consider now the role of hard wall boundary conditions on the system. When both outer spins are up or down the ground state will be unique and given by all spins up or down, respectively. If the spins are one up and one down then the ground state becomes the first excited state of the periodic boundary condition case, which means it's going to be $N$ times degenerate. This means that the wall can be anywhere along the chain and thus can "move" along it. This allows us to divide the possible cases in four classes according to the outer spins: up-up, down-down, up-down, down-up. These last two cases have thus global properties - the presence of a wall in the systems - that can not be changed by simpling perturbing the system locally. With these boundary conditions we can only get rid of the wall by flipping the outer spins, which means changing the global property of the system, going from one class to another. If we only do local changes, the overall state won't change and there will always be a wall. This is like what happens in a torus or a know, where deformations do not eliminate the hole or knot. In this model, these boundary conditions lead to so called \textbf{topological excitations}, which are responsible for disorder in the system in this case.
+
+\subsection{Peierl's Argument for 2D Ising Model}
+
+Let's now apply Peierl's argument
+
+
+
+\chapter{Mean Field Theory}
+
+We now want to obtain very general results based on symmetry arguments, which will help us to explain \textbf{universality}. The main idea of this approach is to neglect statistical fluctuations. This is actually found in many situations, where we say that certain statistical quantities in reality can only assume one value, which coincides with the average value:
+\begin{align}
+	PV &= nRT &\to \expval{P}\expval{V} &= \expval{n}R\expval{T}\\
+	V &= RI &\to \expval{V} &= \expval{R}\expval{I}\\
+	\dv{N}{t} &= kN &\to \dv{\expval{N}}{t} &= k\expval{N}
+\end{align}
+However when the average value of a quantity is zero this obligates us to focus on fluctuations to obtain non-trivial results.\\
+
+Let's now see two examples of mean field theories of the Ising Model, which will arrive to the same result.
+
+\subsection{Molecular Field Approach}
+
+We start with our Ising hamiltonian:
+\begin{equation}
+	H = -J\sum_{\expval{ij}} S_iS_j - h\sum_i S_i
+\end{equation}
+Let us define:
+\begin{equation}
+	H[S_i] = -JS_i\sum_{j\neq i,\NN} S_j - h S_i = -(h + J\sum_{j\neq i,\NN} S_j)
+\end{equation}
+In this we way we notice that the hamiltonian can be written as non-interacting spins, where on each spin there is an "effective magnetic field" also due to the other spins. Our assumption is then that this effective field is the same for every spin (from which "mean field") and thus we can substitute the $S_j$ in the sum with the average value:
+\begin{equation}
+	m = \frac{1}{N}\sum_{j=1}^N \expval{S_j}
+\end{equation}
+from which:
+\begin{equation}
+	H[S_i] = -(h + Jmz)S_i = -h_{eff} S_i \qquad h_{eff} = h + Jzm
+\end{equation}
+
+\subsection{}
+
+Another equivalent approach is to write the spins as the average value plus the fluctuations:
+\begin{equation}
+	S_i = m + \delta S_i
+\end{equation}
+We can then insert this is in our hamiltonian in the interaction term:
+\begin{equation}
+	\begin{split}
+		H &= -J\sum_{\expval{ij}} (m+\delta S_i)(m+\delta S_j) - h\sum_i (m+\delta S_i) =\\
+		&= -J\sum_{\expval{ij}} (m^2 + 2m\delta S_i + \delta S_i\delta S_j) - h\sum_i (m + \delta S_i)
+	\end{split}
+\end{equation}
+The assumption is then to neglect the second order term in the fluctuations and re-write $\delta S_i = S_i - m$:
+\begin{equation}
+	\begin{split}
+		H &= -J\sum_{\expval{ij}} (m^2 + 2m\delta S_i) - h\sum_i (m + \delta S_i) =\\
+		&= -Jz\sum_i (m^2 + 2m\delta S_i) - h\sum_i (m + \delta S_i) =\\
+		&= -Jz\sum_i (m^2 + 2m(S_i - m)) - h\sum_i S_i =\\
+		&= -(h+2Jzm)\sum_i S_i + JzNm^2
+\end{equation}
+
+
+
+\subsection{Duality for different interactions}
+
+We might also interpret the duality as relating two different systems at the same temperature, but with different microscopic interactions and structures. We want to find then the "new" system such that, for a 2D Ising Model on a square lattice:
+\begin{equation}
+	Z_{new}[\beta] = Z_{old}[\tilde{\beta}(\beta)]
+\end{equation}
+As suggested by the low temperature expansion, and the use of the name, a system which lives on the dual lattice seems to be a good starting point. Since the dual lattice is also a square lattice we expect then that the system can be mapped at fixed temperature from a low coupling $J$ to a high coupling $\tilde{J}$. In fact we have already showed that our low-to-high temperature duality in reality is written in terms of $k = \beta J$ and not just $\beta$. Therefore we expect to find that our new system is the square lattice with coupling constant $\tilde{J}$ given by:
+\begin{equation}
+	\beta \to \tilde{\beta} = -\frac{1}{J}\frac{1}{2}\log(\tanh (\beta J)) \iff J \to \tilde{J} = -\frac{1}{\beta} \frac{1}{2}\log(\tanh(\beta J))
+\end{equation}
+
+To do make this explicit we have to re-write the partition function; let's start by introducing a new variable $r$ such that:
+\begin{equation}
+	\begin{split}
+		Z &= \sum_{\{S_i\}} \prod_{\expval{ij}} (\cosh k + S_iS_j\sinh k) =\\
+		&= \sum_{\{S_i\}} \prod_{\expval{ij}} \sum_{r=0}^1 C_r(k) (S_iS_j)^{m_{ij}}
+	\end{split}
+\end{equation}
+where:
+\begin{equation}
+	C_m = \cosh k (\tanh k)^r =
+	\begin{dcases}
+		\cosh k & r = 0\\
+		\sinh k & r = 1
+	\end{dcases}
+\end{equation}
+Since $S_iS_j = \pm 1$, we expect to be able to rewrite the partition function using only $r$, where we take into account $r$ depending on the bond $i,\expval{ij}$ originating from $i$, even if with some constraint on the $r_\mu$, with $\mu = (i,\expval{ij})$. To do this we exchange the product over the bonds $\expval{ij}$ and the sum over $r$:
+
+
+
+
+
+
+
+\section{Lecture 5 (22/09)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

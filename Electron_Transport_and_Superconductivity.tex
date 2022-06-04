@@ -1,0 +1,186 @@
+\documentclass{book}
+
+\begin{document}
+
+\section{Lecture 1 (07/09)}
+
+Our first approach to electronic transport in a solid will be at \textbf{semiclassical} level.
+At the microscopic level we have usually a cristalline solid, which has an energy band structure and a chemical potential or fermi energy which has some value. If this falls inside a band then we have a metal, if this falls between two bands then we have an insulator, at least as far as the single particle picture is concerned. This is a wavelike description of particles at the atomic scale.
+
+At the macroscopic level we have a corpular description of transport in conductors, where there's a certain Drude conductivity related to the average scattering time between two particles.\\
+
+The main length scales regarding this problem are the following:
+\begin{enumerate}
+	\item $\lambda_F \sim 1-100\si{\nano\m}$, the Fermi wavelength, which is due to the quantum confinement.
+	\item $l_e \sim 10\si{\nano\m}-100\si{\mu\m}$, the elastic mean free path, which is related to path between two collisions with static impurities, doesn't have energy loss and preserves the phase of the wavefunction (only changes the momentum). This is responsible for a diffusive transport regime.
+	\item $l_\phi \sim 10\si{\nano\m} - 10\si{\mu\m}$, the phase coherence length, which is instead related to inelastic collisions with other electrons or the lattice, which destroy the coherence of the wave functions (give additional phases or mix between different eigenfunctions). This means that the electrons lose information to the lattice.
+	\item $L$, the length of the conductor (or the dimension along which it is conducting)
+\end{enumerate}
+We notice that while the Fermi wavelength is usually the shorter length, at least at low temperaure.
+
+
+There are usually three transport regimes:
+\begin{enumerate}
+	\item $l_e,l_\phi\ll L$, called the semiclassical transport regime, where Drude and Ohm's Law are valid. This regime is usually valid at high temperature and macroscopic scales (large L), but not mesoscopic
+	\item $l_e\ll L < l_\phi$, called the weak localization regime, where diffusive and coherent transport are prevailing. This usually applies for metals at low temperature
+	\item $L\ll l_e,l_\phi$, called the ballistic regime, which happens in low dimensional conductors, such as graphene, 2DEG, carbon nanotubes.
+\end{enumerate}
+
+Let's look now at four examples of transport phenomena in solids. The first truly quantum effect we will deal with is the Quantizaion of Conductance, which happens at low temperature in mesoscopic conductors. We will see that changing the chemical potential (gate voltage) we can increase the conductance only by a quantized quantity:
+\begin{equation}
+	G = N\frac{2e^2}{h}
+\end{equation}
+We will also deal the weak localization regime, where the conductor length is much bigger than the elastic mean free path but smaller than the phase coherence length. In this regime we can vary an applied magnetic field to vary resistivity, which we will see later in the course. We will see that this represents a sort of "first correction" to the classical regime.
+
+Another quantum transport phenomena is the Quantum Hall Effect, where the hall (transverse) conductance is quantized, and an increasing magnetic field lets the resistance goes from a "plateau" to another. Classically, this resistance increases linearly with magnetic field, but this is found to be only true at low enough magnetic fields. Furthermore, at the transition points between two plateaus the longitudinal resistance has a resonant behaviour, and goes to zero otherwise.\\
+
+
+
+\subsection{Outline of the Courses}
+
+The course will be divided in two parts, each consisting of a certain number of chapters. The first part will be consist of the following six chapters:
+\begin{enumerate}
+	\item Semiclassical transport theory
+	\item Ballistic transport and conductance quantization
+	\item From ballistic transport to Ohm's Law
+	\item Quantum coherence in diffusive conductors: weak localization
+	\item The integer quantum Hall Effect
+	\item Topology and quantum Hall effect
+\end{enumerate}
+
+The books that will most closely follow the course are the following:
+\begin{enumerate}
+	\item Girving, Yang: Modern Condensed Matters Physics, which has many chapters on quantum transport
+	\item Datta: Electronic Transport in Mesoscopic Systems, which is a classic book for transport in mesoscopic conductors,
+	\item Ihn: Quantum transport in nanostructures, which has more modern contents on quantum transport
+	\item Pottier: Statistical Physics, which will be useful for a reminder of the Boltzmann equation.
+\end{enumerate}
+
+
+
+\subsection{Reminder of Band Theory}
+
+
+As introduction to the semiclassical description of transport we remind ourselves of band theory. In this theory the electrons are inside an the same periodic potential (which is due to the ionic interactions). Due to periodicity the hamiltonian is invariant under discreet translations in the Bravais lattice and therefore the eigenfunctions are also eigenfunctions of all the translation operators. Since these are unitary the eigenvalues are phases $e^{\i\phi}$; furthermore translations are additive, which means $\phi$ depends on the translation vector linearly. This leaves us with:
+\begin{equation}
+	T_{\R} = \ket{\psi_{n\k}} = e^{\i\k\cdot\R} \ket{\psi_{n\k}}
+\end{equation}
+where $n$ is the degeneracy index, which is usually discreet and $\k$ belongs to a unit cell of the reciprocal lattice, usually chosen to be the Brillouin Zone and can vary continuously inside it. Therefore the energy spectrum has a band structure, with each band indexed by a certain index $n$.
+\begin{equation}
+	\H\ket{\psi_{n\k}}
+\end{equation}
+For a 1D conductor the BZ is also 1D and given by $(-\pi/a,\pi/a)$, and the band structure will be made of various curves which may intersect over this interval.\\
+Since the applied electric fields are usually very small then the electrons will tend to stay in one band and we can limit ourselves to fixed $n$. The condition for which this is true is given by:
+\begin{equation}
+	eEa \ll \frac{\Delta^2}{\varepsilon_F}
+\end{equation}
+When this condition is not satisfied, i.e. there is no gap, we deal with interband processes, which we wont' deal with.\\
+
+
+The translation symmetry also implies that the eigenfunctions are periodic up to a phase factor:
+\begin{equation}
+	\psi_{n\k}(\r+\R) = e^{\i\k\cdot\R} \psi_{n\k}(\r) \iff \psi_{n\k}(\r) = e^{\i\k\cdot\r} u_{n\k}(\r) \qquad u_{n\k}(\r+\R) = u_{n\k}(\r)
+\end{equation}
+This also means that in such ordered solids the electrons are perfectly delocalized.\\
+
+Due to collisions with other electrons, impurities and the lattice however usually (in certain regimes) the electrons will tend to be in \textbf{wavepackets}, i.e. linear combinations of various eigenfunctions:
+\begin{equation}
+	\phi_{n\k_0}(\r) = \int\dd[3]{\k} \psi_{n\k}(\r) g(\k-\k_0) e^{-\i\k_0\cdot\r}
+\end{equation}
+where $g(\k)$ has a certain non-zero width $\Delta k$ around zero. Since momentum and position do not commute the width of this packet in k-space is related by the width in real space:
+\begin{equation}
+	\Delta r\Delta k \sim 1
+\end{equation}
+Therefore for Bloch states we will observe a very localized function in k-space and very delocalized in real space, while for a wavepacket we will observe a certain width in k-space and therefore a finite width in real space.
+
+%Insert figure page 7
+
+In particular, since the higher energy electrons are those that contribute more to the conductivity (as we will see in detail) then the typical width in k space will be given by:
+\begin{equation}
+	\Delta k \sim k_F \qquad \varepsilon(k_F) = \varepsilon_F \then \Delta r \sim 1/k_F
+\end{equation}
+
+This means that there is both a localization in k space and in real space, which means we can assign a certain position and momentum to the particle at any istant, ignoring the negligible width. Therefore we recover the classical description of a particle state as the couple $\r(t)$ and $\k_0(t)$, which evolve in time according to some equation. Without going into the detail, one can show that the time evolution is due to the two following equations, which closely remind us of the hamilton equation:
+\begin{equation}
+	\begin{dcases}
+		\v_n(\k_0) = \frac{1}{\hbar}\grad_{\k} \varepsilon(\k)|_{\k=\k_0}\\
+		\hbar\dv{\k_0}{t} = \F(\r) = q(\E(\r) + \v\times\B(\r))
+	\end{dcases}
+\end{equation}
+We won't deal with magnetic fields in a classical context and therefore we will drop the $\B$ term:
+\begin{equation}
+	\begin{dcases}
+		\v_n(\k_0) = \frac{1}{\hbar}\grad_{\k} \varepsilon_n(\k)|_{\k=\k_0}\\
+		\hbar\dv{\k_0}{t} = q\E(\r)
+	\end{dcases}
+\end{equation}
+It's now clear that the semiclassical transport deals with electron transport in the case where electrons evolve as wavepackets with finite k and real space widths, which then evolve according to classical equations.\\
+We notice that the first equation reduces to the expected relation between velocity and momentum for a free electron:
+\begin{equation}
+	\varepsilon_n(\k) = \frac{\hbar^2k^2}{2m} \then \v_n = \frac{\hbar\k}{m}
+\end{equation}
+
+
+
+\subsection{Bloch Oscillations}
+
+
+Let's take now a uniform and constant electric field along the $x$ axis. The electrons responsible for transport will therefore also travel along this direction, with constant velocity:
+\begin{equation}
+	\hbar\dv{\k_0}{t} = -eE\e_x \then k_0(t) = -\frac{e}{\hbar}Et
+\end{equation}
+Since the $\k$ is periodic of periodicity $2\pi/a$, the motion in momentum space will be also periodic in time. An electron arriving at $k=\pi/a$ will therefore "exit" from one side and "enter" from the other side at $k=-\pi/a$. This kind of periodic motion is called \textbf{Bloch Oscillation}, with period:
+\begin{equation}
+	\frac{eET}{\hbar} = \frac{2\pi}{a} \iff T = \frac{h}{eEa}
+\end{equation}
+A quick estimate for typical fields results in a period of the order of $T\approx 10^{-12}\si{\s} = 1\si{\pico\s}$. This time scale is however much longer than the mean collision time with other electrons, lattice ions of phonons. This means that in reality we don't observe this oscillations, but it has been observed in very specific samples.
+
+
+
+\subsection{Boltzmann Equation}
+
+We can now start to study the transport of electrons in solids at the macroscopic level. Withing a given band electrons will be labelled only by $(\r,\k)$, which means that the probability that the state $\r,\k$ will be occupied by an electron (in a band $n$) at time $t$ is well defined and has a densiy distribution function which we shall represent with:
+\begin{equation}
+	f(\r,\k,t)
+\end{equation}
+where we have suppressed the index $n$ for simplicity. This means that the number of electrons in the phase space volume $\dd[3]{\r}\dd[3]{\k}$ will be given by:
+\begin{equation}
+	\dd{n} = f(\r,\k,t) \frac{\dd[3]{\r}\dd[3]{\k}}{(2\pi)^3}
+\end{equation}
+The electron density in space at a given time is found by integrating; we also have to multiply by two, since we have until now ignored the role of spin:
+\begin{equation}
+	n(\r,t) = 2 \int \frac{\dd[3]{\k}}{(2\pi)^3} f(\r,\k,t)
+\end{equation}
+At a given $\r$, the (electronic) density current will be given by all the possible contributions $-e\v_n(\k)$, each multiplied by the probability $2 f(\r,\k,t) \frac{\dd[3]{\k}}{(2\pi)^3}$, and summed over $\k$:
+\begin{equation}
+	\J_n(\r,t) = -2e\int \frac{\dd[3]{\k}}{(2\pi)^3} \v_n(\k) f(\r,\k,t)
+\end{equation}
+Using the probability function $f$ we can therefore compute both the electron density and current density.\\
+
+For the moment let's consider the evolution of $f$ in the absence of collisions, i.e. a "perfect" system. In this case Liouville's theorem applies: the probability to find an electron in $\r,\k$ at time $t$ is the same as the probability to find an electron in $\r',\k'$ at an istant $t'$, where $\r',\k'$ are the position and momentum at time $t'$ of an electron with initial conditions $\r,\k$ at time $t$. This means that:
+\begin{equation}
+	f(\r,\k,t)\dd[3]{\r}\dd[3]{\k} = f(\r',\k',t') \dd[3]{\r'}\dd[3]{\k'}
+\end{equation}
+In absence of collisions the phase space volume is conserved:
+\begin{equation}
+	\dd[3]{\r}\dd[3]{\k} = \dd[3]{\r'}\dd[3]{\k'}
+\end{equation}
+and therefore we obtain the identity:
+\begin{equation}
+	f(\r,\k,t) = f(\r',\k',t')
+\end{equation}
+where $\r',\k'$ are defined with respect to $\r,\k,t,t'$ as before.\\
+
+In the case $t' = t + \dd{t}$ the time evolution is simply given by the initial position/momentum plus the infinitesimal displacement:
+\begin{equation}
+	\r' = \r + \dd{\r} = \r + \v_n(\k) \dd{t} \qquad \k' = \k + \dd{\k} = \k + \frac{\F}{\hbar}\dd{t}
+\end{equation}
+This means that the identity obtained becomes:
+\begin{equation}
+	\dv{f}{t} = 0 \iff v_n(\k)\cdot\grad_{\r} f + \frac{\F}{\hbar}\cdot\grad_{\k}f + \pdv{f}{t} = 0
+\end{equation}
+
+
+
+
+\end{document}
